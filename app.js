@@ -192,27 +192,38 @@ function setCurrentStepTime() {
   remaining = step?.seconds || 0;
   total = remaining;
 }
-function manualButtonLabel() {
-  const step = timerSteps[timerIndex];
-  if (!step) return "Nächster Schritt";
-  const label = step.label.toLowerCase();
-  const text = step.text.toLowerCase();
-  if (label.includes("warm-up")) return "Warm-up beendet";
-  if (label.includes("cool-down")) return "Cool-down beendet";
-  if (text.includes("600 m")) return "600 m beendet";
-  if (text.includes("200 m")) return "200 m beendet";
-  if (text.includes("1 km")) return "1 km beendet";
-  if (text.includes("500 m")) return "500 m beendet";
-  if (text.includes("1 runde")) return "1 Runde beendet";
-  if (text.includes("2 runden")) return "2 Runden beendet";
-  if (text.includes("3 runden")) return "3 Runden beendet";
-  return "Nächster Schritt";
+function updateControlButtons(step) {
+  const startBtn = $("startBtn");
+  const pauseBtn = $("pauseBtn");
+  const nextBtn = $("nextBtn");
+
+  nextBtn.textContent = "Nächster Schritt";
+
+  if (!step) {
+    startBtn.textContent = "Fertig";
+    startBtn.disabled = true;
+    pauseBtn.disabled = true;
+    nextBtn.disabled = true;
+    return;
+  }
+
+  if (step.type === "distance") {
+    startBtn.textContent = trainingActive ? "Training aktiv" : "Training starten";
+    startBtn.disabled = trainingActive;
+    pauseBtn.disabled = true;
+    nextBtn.disabled = false;
+    return;
+  }
+
+  startBtn.textContent = running ? "Läuft" : (remaining < total ? "Fortsetzen" : "Start");
+  startBtn.disabled = running;
+  pauseBtn.disabled = !running;
+  nextBtn.disabled = true;
 }
+
 function updateTimer() {
   const step = timerSteps[timerIndex];
-  const nextBtn = $("nextBtn");
-  nextBtn.textContent = step?.type === "distance" ? manualButtonLabel() : "Nächster Schritt";
-  nextBtn.disabled = !step || step.type === "time";
+  updateControlButtons(step);
 
   if (!step) {
     $("timerLabel").textContent = "Fertig";
@@ -226,11 +237,18 @@ function updateTimer() {
   if (step.label === "Fast") info += ` · Ziel: ${fastRange()}`;
   if (step.label === "Threshold") info += ` · Ziel: ${thresholdRange()}`;
 
+  if (step.type === "distance" && trainingActive) {
+    info += " · danach „Nächster Schritt“";
+  }
+
   $("timerLabel").textContent = `${step.label} (${timerIndex + 1}/${timerSteps.length})`;
   $("timerTime").textContent = step.type === "time" ? formatTime(remaining) : "MANUELL";
   $("timerInfo").textContent = info;
-  $("progressFill").style.width = step.type === "time" && total ? `${((total - remaining) / total) * 100}%` : "0%";
+  $("progressFill").style.width = step.type === "time" && total
+    ? `${((total - remaining) / total) * 100}%`
+    : "0%";
 }
+
 async function beginTraining(index = selected) {
   if (Number(index) !== selected) selectWeek(index);
   trainingActive = true;
@@ -238,17 +256,28 @@ async function beginTraining(index = selected) {
   $("timerSection").scrollIntoView({ behavior:"smooth" });
   updateTimer();
 }
-function startTimer() {
+async function startTimer() {
   const step = timerSteps[timerIndex];
-  if (!step || step.type !== "time" || running) return;
+  if (!step || running) return;
+
   trainingActive = true;
-  enableWakeLock();
+  await enableWakeLock();
+
+  if (step.type === "distance") {
+    vibrate(100);
+    speak(`Training gestartet. ${step.text}. Danach Nächster Schritt drücken.`);
+    updateTimer();
+    return;
+  }
+
   running = true;
   vibrate(120);
   speak(`Los. ${step.label} startet`);
+  updateTimer();
 
   intervalId = window.setInterval(() => {
     remaining -= 1;
+
     if (remaining === 3) speak("3");
     if (remaining === 2) speak("2");
     if (remaining === 1) speak("1");
@@ -259,6 +288,7 @@ function startTimer() {
       advanceStep();
       return;
     }
+
     updateTimer();
   }, 1000);
 }
@@ -266,10 +296,12 @@ function stopTimer() {
   running = false;
   if (intervalId) window.clearInterval(intervalId);
   intervalId = null;
+  if (timerSteps.length) updateTimer();
 }
 function pauseTimer() {
   stopTimer();
   disableWakeLock();
+  updateTimer();
 }
 function advanceStep() {
   stopTimer();
@@ -387,7 +419,10 @@ function bindEvents() {
   $("savePacesBtn").addEventListener("click", savePaces);
   $("startBtn").addEventListener("click", startTimer);
   $("pauseBtn").addEventListener("click", pauseTimer);
-  $("nextBtn").addEventListener("click", advanceStep);
+  $("nextBtn").addEventListener("click", () => {
+    const step = timerSteps[timerIndex];
+    if (step?.type === "distance") advanceStep();
+  });
   $("resetBtn").addEventListener("click", resetTimer);
   $("finishBtn").addEventListener("click", finishTraining);
   $("copyStravaBtn").addEventListener("click", () => copyText(stravaText()));

@@ -1,4 +1,4 @@
-const CACHE_NAME = "running-society-github-v1";
+const CACHE_NAME = "running-society-github-v2-0-2";
 const CORE_ASSETS = [
   "./",
   "index.html",
@@ -39,12 +39,25 @@ self.addEventListener("message", event => {
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
 
+  const url = new URL(event.request.url);
+
+  // Browser-Erweiterungen und andere nicht unterstützte Schemes nie cachen.
+  if (url.protocol !== "http:" && url.protocol !== "https:") return;
+
+  // Fremde Domains normal laden, aber nicht in den App-Cache schreiben.
+  if (url.origin !== self.location.origin) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   event.respondWith(
     fetch(event.request, { cache:"no-store" })
       .then(response => {
         if (response.ok) {
           const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+          event.waitUntil(
+            caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy))
+          );
         }
         return response;
       })
