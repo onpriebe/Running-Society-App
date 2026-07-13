@@ -23,11 +23,38 @@ const userPaces = {
 
 const $ = id => document.getElementById(id);
 
+function normalizePaceInput(value) {
+  const raw = (value || "").trim().replace(",", ".").replace(/\s+/g, "");
+  if (!raw) return null;
+
+  let minutes;
+  let seconds;
+
+  if (/^\d{3}$/.test(raw)) {
+    minutes = Number(raw.slice(0, 1));
+    seconds = Number(raw.slice(1));
+  } else if (/^\d{4}$/.test(raw)) {
+    minutes = Number(raw.slice(0, 2));
+    seconds = Number(raw.slice(2));
+  } else {
+    const match = raw.match(/^(\d{1,2})[:.](\d{1,2})$/);
+    if (!match) return null;
+    minutes = Number(match[1]);
+    seconds = Number(match[2]);
+  }
+
+  if (!Number.isFinite(minutes) || !Number.isFinite(seconds)) return null;
+  if (minutes < 2 || minutes > 15 || seconds < 0 || seconds > 59) return null;
+
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
 function parsePace(value) {
-  const match = (value || "").trim().match(/^(\d+):(\d{1,2})$/);
-  if (!match) return null;
-  const seconds = Number(match[1]) * 60 + Number(match[2]);
-  return Number(match[2]) < 60 ? seconds : null;
+  const normalized = normalizePaceInput(value);
+  if (!normalized) return null;
+
+  const [minutes, seconds] = normalized.split(":").map(Number);
+  return minutes * 60 + seconds;
 }
 function paceString(seconds) {
   return `${Math.floor(seconds / 60)}:${String(Math.round(seconds % 60)).padStart(2, "0")}/km`;
@@ -110,10 +137,38 @@ function calculatePaces() {
   $("paceResult").textContent = parts.length ? parts.join(" · ") : "Trage eine Pace ein.";
 }
 function savePaces() {
-  userPaces.fiveK = $("pace5k").value.trim();
-  userPaces.threshold = $("paceThreshold").value.trim();
+  const fiveKInput = $("pace5k");
+  const thresholdInput = $("paceThreshold");
+
+  const normalizedFiveK = normalizePaceInput(fiveKInput.value);
+  const normalizedThreshold = normalizePaceInput(thresholdInput.value);
+
+  const errors = [];
+
+  if (fiveKInput.value.trim() && !normalizedFiveK) {
+    errors.push("5k-Pace");
+    fiveKInput.value = userPaces.fiveK;
+  }
+
+  if (thresholdInput.value.trim() && !normalizedThreshold) {
+    errors.push("Threshold-Pace");
+    thresholdInput.value = userPaces.threshold;
+  }
+
+  if (errors.length) {
+    $("paceResult").textContent = `Ungültige Eingabe: ${errors.join(" und ")}. Bitte z. B. 4:30, 4.30, 4,30 oder 430 eingeben.`;
+    return;
+  }
+
+  userPaces.fiveK = normalizedFiveK || "";
+  userPaces.threshold = normalizedThreshold || "";
+
+  fiveKInput.value = userPaces.fiveK;
+  thresholdInput.value = userPaces.threshold;
+
   localStorage.setItem("rs_5k_pace", userPaces.fiveK);
   localStorage.setItem("rs_threshold_pace", userPaces.threshold);
+
   calculatePaces();
   renderAll();
 }
@@ -385,6 +440,20 @@ function toggleTheme() {
   localStorage.setItem("rs_theme", document.documentElement.classList.contains("light") ? "light" : "dark");
 }
 
+function formatPaceField(input, fallbackValue) {
+  const value = input.value.trim();
+  if (!value) return;
+
+  const normalized = normalizePaceInput(value);
+  if (normalized) {
+    input.value = normalized;
+    calculatePaces();
+  } else {
+    input.value = fallbackValue;
+    $("paceResult").textContent = "Ungültige Pace. Bitte z. B. 4:30, 4.30, 4,30 oder 430 eingeben.";
+  }
+}
+
 function bindEvents() {
   $("weekButtons").addEventListener("click", event => {
     const btn = event.target.closest("[data-week]");
@@ -416,6 +485,8 @@ function bindEvents() {
   $("themeBtn").addEventListener("click", toggleTheme);
   $("pace5k").addEventListener("input", calculatePaces);
   $("paceThreshold").addEventListener("input", calculatePaces);
+  $("pace5k").addEventListener("blur", () => formatPaceField($("pace5k"), userPaces.fiveK));
+  $("paceThreshold").addEventListener("blur", () => formatPaceField($("paceThreshold"), userPaces.threshold));
   $("savePacesBtn").addEventListener("click", savePaces);
   $("startBtn").addEventListener("click", startTimer);
   $("pauseBtn").addEventListener("click", pauseTimer);

@@ -14,7 +14,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=2.0.3">
+  <link rel="stylesheet" href="styles.css?v=2.0.4">
 </head>
 <body>
   <header class="hero">
@@ -43,12 +43,12 @@
         <div class="tools">
           <label class="tool">
             <span class="label">5k Pace</span>
-            <input id="pace5k" inputmode="numeric" placeholder="z. B. 4:30">
+            <input id="pace5k" type="text" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="z. B. 4:30 oder 430">
             <span class="small">Fast ≈ 5k-Pace</span>
           </label>
           <label class="tool">
             <span class="label">Threshold</span>
-            <input id="paceThreshold" inputmode="numeric" placeholder="z. B. 4:50">
+            <input id="paceThreshold" type="text" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="z. B. 4:50 oder 450">
             <span class="small">Schwelle / kontrolliert hart</span>
           </label>
         </div>
@@ -90,6 +90,6 @@
 
   <footer>easy = sehr locker · fast = ca. 5k-Pace / RPE 8–9 · threshold = kontrolliert hart / RPE 7–8</footer>
 
-  <script src="app.js?v=2.0.3" defer></script>
+  <script src="app.js?v=2.0.4" defer></script>
 </body>
 </html>
