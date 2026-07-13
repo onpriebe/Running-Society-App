@@ -47,7 +47,7 @@ h2 { letter-spacing:-.035em; margin:4px 0 10px; }
 .label { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-weight:900; }
 .value { margin-top:3px; }
 .route-img { width:100%; border-radius:18px; border:1px solid var(--line); display:block; margin:10px 0; aspect-ratio:16/9; object-fit:cover; }
-.map-btn { background:var(--accent); color:#111827; font-weight:900; }
+.map-btn { background:var(--accent); color:#111827; font-weight:900; margin-bottom: 20px; }
 .details { display:none; border-top:1px dashed var(--line); margin-top:12px; padding-top:12px; }
 .details.show { display:block; }
 ol { padding-left:22px; } li { margin:7px 0; }
