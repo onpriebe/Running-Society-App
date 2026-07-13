@@ -366,10 +366,20 @@ function stopTimer() {
   intervalId = null;
   if (timerSteps.length) updateTimer();
 }
-function pauseTimer() {
-  stopTimer();
-  disableWakeLock();
-  updateTimer();
+async function pauseTimer() {
+  const step = timerSteps[timerIndex];
+  if (!step || step.type !== "time") return;
+
+  if (running) {
+    stopTimer();
+    await disableWakeLock();
+    updateTimer();
+    return;
+  }
+
+  if (remaining > 0 && remaining < total) {
+    await startTimer();
+  }
 }
 function advanceStep() {
   stopTimer();
