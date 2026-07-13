@@ -270,9 +270,22 @@ function updateControlButtons(step) {
     return;
   }
 
-  startBtn.textContent = running ? "Läuft" : (remaining < total ? "Fortsetzen" : "Start");
-  startBtn.disabled = running;
-  pauseBtn.disabled = !running;
+  if (running) {
+    startBtn.textContent = "Läuft";
+    startBtn.disabled = true;
+    pauseBtn.textContent = "Pause";
+    pauseBtn.disabled = false;
+  } else if (remaining < total && total > 0) {
+    startBtn.textContent = "Pausiert";
+    startBtn.disabled = true;
+    pauseBtn.textContent = "Fortsetzen";
+    pauseBtn.disabled = false;
+  } else {
+    startBtn.textContent = "Start";
+    startBtn.disabled = false;
+    pauseBtn.textContent = "Pause";
+    pauseBtn.disabled = true;
+  }
   nextBtn.disabled = false;
 }
 
