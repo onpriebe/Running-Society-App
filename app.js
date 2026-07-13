@@ -218,7 +218,7 @@ function updateControlButtons(step) {
   startBtn.textContent = running ? "Läuft" : (remaining < total ? "Fortsetzen" : "Start");
   startBtn.disabled = running;
   pauseBtn.disabled = !running;
-  nextBtn.disabled = true;
+  nextBtn.disabled = false;
 }
 
 function updateTimer() {
@@ -420,8 +420,11 @@ function bindEvents() {
   $("startBtn").addEventListener("click", startTimer);
   $("pauseBtn").addEventListener("click", pauseTimer);
   $("nextBtn").addEventListener("click", () => {
-    const step = timerSteps[timerIndex];
-    if (step?.type === "distance") advanceStep();
+    if (timerSteps[timerIndex]) {
+      vibrate(120);
+      speak("Nächster Abschnitt");
+      advanceStep();
+    }
   });
   $("resetBtn").addEventListener("click", resetTimer);
   $("finishBtn").addEventListener("click", finishTraining);
