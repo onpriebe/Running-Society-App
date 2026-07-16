@@ -11,199 +11,199 @@
       "image": "images/woche1.png",
       "goal": "VO₂max / schnelles Laufen sauber wiederholen",
       "paceMode": "fast",
-      "warmup": "2,5 km easy",
-      "main": "15 × 1 min fast / 1 min easy",
+      "warmup": "2,5 km easy Lauf",
+      "main": "15 × 1 min schneller Lauf / 1 min easy Lauf",
       "cooldown": "2,5 km cool down",
       "steps": [
         {
           "label": "Warm-up",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "time",
           "text": "1 min schnell",
           "seconds": 60
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "time",
-          "text": "1 min easy",
+          "text": "1 min easy Lauf",
           "seconds": 60
         },
         {
           "label": "Cool-down",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         }
       ]
     },
@@ -213,141 +213,105 @@
       "image": "images/woche2.png",
       "goal": "Speed Endurance / Tempo über längere Abschnitte halten",
       "paceMode": "fast",
-      "warmup": "2,5 km easy",
-      "main": "8 × (600 m schnell + 200 m easy + 1 min Pause)",
-      "cooldown": "2,5 km easy",
+      "warmup": "2,5 km easy Lauf",
+      "main": "4 × 600 m schneller Lauf + 200 m easy Lauf · 1 min Pause · 4 × 600 m schneller Lauf + 200 m easy Lauf",
+      "cooldown": "2,5 km easy Lauf",
       "steps": [
         {
           "label": "Warm-up",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
-          "text": "600 m schnell"
+          "text": "600 m"
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "distance",
-          "text": "200 m easy"
+          "text": "200 m"
+        },
+        {
+          "label": "Schneller Lauf",
+          "type": "distance",
+          "text": "600 m"
+        },
+        {
+          "label": "Easy Lauf",
+          "type": "distance",
+          "text": "200 m"
+        },
+        {
+          "label": "Schneller Lauf",
+          "type": "distance",
+          "text": "600 m"
+        },
+        {
+          "label": "Easy Lauf",
+          "type": "distance",
+          "text": "200 m"
+        },
+        {
+          "label": "Schneller Lauf",
+          "type": "distance",
+          "text": "600 m"
+        },
+        {
+          "label": "Easy Lauf",
+          "type": "distance",
+          "text": "200 m"
         },
         {
           "label": "Pause",
           "type": "time",
-          "text": "1 min Pause",
-          "seconds": 60
+          "seconds": 60,
+          "text": "1 min"
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
-          "text": "600 m schnell"
+          "text": "600 m"
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "distance",
-          "text": "200 m easy"
+          "text": "200 m"
         },
         {
-          "label": "Pause",
-          "type": "time",
-          "text": "1 min Pause",
-          "seconds": 60
-        },
-        {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
-          "text": "600 m schnell"
+          "text": "600 m"
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "distance",
-          "text": "200 m easy"
+          "text": "200 m"
         },
         {
-          "label": "Pause",
-          "type": "time",
-          "text": "1 min Pause",
-          "seconds": 60
-        },
-        {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
-          "text": "600 m schnell"
+          "text": "600 m"
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "distance",
-          "text": "200 m easy"
+          "text": "200 m"
         },
         {
-          "label": "Pause",
-          "type": "time",
-          "text": "1 min Pause",
-          "seconds": 60
-        },
-        {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
-          "text": "600 m schnell"
+          "text": "600 m"
         },
         {
-          "label": "Easy",
+          "label": "Easy Lauf",
           "type": "distance",
-          "text": "200 m easy"
-        },
-        {
-          "label": "Pause",
-          "type": "time",
-          "text": "1 min Pause",
-          "seconds": 60
-        },
-        {
-          "label": "Fast",
-          "type": "distance",
-          "text": "600 m schnell"
-        },
-        {
-          "label": "Easy",
-          "type": "distance",
-          "text": "200 m easy"
-        },
-        {
-          "label": "Pause",
-          "type": "time",
-          "text": "1 min Pause",
-          "seconds": 60
-        },
-        {
-          "label": "Fast",
-          "type": "distance",
-          "text": "600 m schnell"
-        },
-        {
-          "label": "Easy",
-          "type": "distance",
-          "text": "200 m easy"
-        },
-        {
-          "label": "Pause",
-          "type": "time",
-          "text": "1 min Pause",
-          "seconds": 60
-        },
-        {
-          "label": "Fast",
-          "type": "distance",
-          "text": "600 m schnell"
-        },
-        {
-          "label": "Easy",
-          "type": "distance",
-          "text": "200 m easy"
+          "text": "200 m"
         },
         {
           "label": "Cool-down",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         }
       ]
     },
@@ -357,17 +321,17 @@
       "image": "images/woche3.png",
       "goal": "1k Repeats / kontrolliert schnell und konstant bleiben",
       "paceMode": "fast",
-      "warmup": "2,5 km easy",
+      "warmup": "2,5 km easy Lauf",
       "main": "5 × 1 km mit 90 sec Pause",
       "cooldown": "2,5 km cool down",
       "steps": [
         {
           "label": "Warm-up",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "1 km schnell"
         },
@@ -378,7 +342,7 @@
           "seconds": 90
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "1 km schnell"
         },
@@ -389,7 +353,7 @@
           "seconds": 90
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "1 km schnell"
         },
@@ -400,7 +364,7 @@
           "seconds": 90
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "1 km schnell"
         },
@@ -411,14 +375,14 @@
           "seconds": 90
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "1 km schnell"
         },
         {
           "label": "Cool-down",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         }
       ]
     },
@@ -428,17 +392,17 @@
       "image": "images/woche4.png",
       "goal": "Pyramide / Tempo dosieren und wieder anlaufen",
       "paceMode": "fast",
-      "warmup": "2,5 km easy",
+      "warmup": "2,5 km easy Lauf",
       "main": "1–2–3–2–1 Runden schnell mit 1–2–3–2 min Pause",
-      "cooldown": "2,5 km easy",
+      "cooldown": "2,5 km easy Lauf",
       "steps": [
         {
           "label": "Warm-up",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "1 Runde (400 m) schnell"
         },
@@ -449,7 +413,7 @@
           "seconds": 60
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "2 Runden (800 m) schnell"
         },
@@ -460,7 +424,7 @@
           "seconds": 120
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "3 Runden (1.200 m) schnell"
         },
@@ -471,7 +435,7 @@
           "seconds": 180
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "2 Runden (800 m) schnell"
         },
@@ -482,14 +446,14 @@
           "seconds": 120
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "1 Runde (400 m) schnell"
         },
         {
           "label": "Cool-down",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         }
       ]
     },
@@ -499,14 +463,14 @@
       "image": "images/woche5.png",
       "goal": "Laktatschwelle / kontrolliert hart über längere Zeit",
       "paceMode": "threshold",
-      "warmup": "2,5 km easy",
+      "warmup": "2,5 km easy Lauf",
       "main": "6–5–4–3–2–1 min threshold mit je 90 sec active pause",
       "cooldown": "2,5 km cool down",
       "steps": [
         {
           "label": "Warm-up",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         },
         {
           "label": "Threshold",
@@ -577,7 +541,7 @@
         {
           "label": "Cool-down",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         }
       ]
     },
@@ -587,17 +551,17 @@
       "image": "images/woche6.png",
       "goal": "500m Repeats / schnell, sauber, kurze Pausen",
       "paceMode": "fast",
-      "warmup": "2,5 km easy",
+      "warmup": "2,5 km easy Lauf",
       "main": "12 × 500 m mit 45 sec Pause",
-      "cooldown": "2,5 km easy",
+      "cooldown": "2,5 km easy Lauf",
       "steps": [
         {
           "label": "Warm-up",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -608,7 +572,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -619,7 +583,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -630,7 +594,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -641,7 +605,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -652,7 +616,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -663,7 +627,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -674,7 +638,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -685,7 +649,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -696,7 +660,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -707,7 +671,7 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
@@ -718,14 +682,14 @@
           "seconds": 45
         },
         {
-          "label": "Fast",
+          "label": "Schneller Lauf",
           "type": "distance",
           "text": "500 m schnell"
         },
         {
           "label": "Cool-down",
           "type": "distance",
-          "text": "2,5 km easy"
+          "text": "2,5 km easy Lauf"
         }
       ]
     }
