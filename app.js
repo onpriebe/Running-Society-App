@@ -71,18 +71,74 @@ function easyRange() {
 function dynamicPace(workout) {
   return workout.paceMode === "threshold"
     ? `Threshold: ${thresholdRange()} · Active Pause: locker traben`
-    : `Fast: ${fastRange()} · Easy: ${easyRange()}`;
+    : `Schneller Lauf: ${fastRange()} · Easy Lauf: ${easyRange()}`;
 }
-function enhancedMain(workout) {
-  switch (workout.week) {
-    case 1: return `15 × 1 min @ ${fastRange()} / 1 min easy`;
-    case 2: return `8 × 600 m @ ${fastRange()} + 200 m easy + 1 min Pause`;
-    case 3: return `5 × 1 km @ ${fastRange()} · 90 sec Pause`;
-    case 4: return `1–2–3–2–1 Runden schnell @ ${fastRange()} · Pausen 1/2/3/2 min`;
-    case 5: return `6–5–4–3–2–1 min @ ${thresholdRange()} · je 90 sec active pause`;
-    case 6: return `12 × 500 m @ ${fastRange()} · 45 sec Pause`;
-    default: return workout.main;
+
+function secondsLabel(seconds) {
+  if (seconds % 60 === 0) {
+    const minutes = seconds / 60;
+    return `${minutes} min`;
   }
+  return `${seconds} sec`;
+}
+
+function mainSteps(workout) {
+  return workout.steps.filter(step =>
+    step.label !== "Warm-up" && step.label !== "Cool-down"
+  );
+}
+
+function summaryFromSteps(workout) {
+  const steps = mainSteps(workout);
+  const quick = steps.filter(step => step.label === "Schneller Lauf");
+  const easy = steps.filter(step => step.label === "Easy Lauf");
+  const pauses = steps.filter(step => step.label === "Pause");
+  const threshold = steps.filter(step => step.label === "Threshold");
+  const activePauses = steps.filter(step => step.label === "Active pause");
+
+  if (workout.week === 1 && quick.length && easy.length) {
+    return `${quick.length} × ${quick[0].text} @ ${fastRange()} / ${easy[0].text}`;
+  }
+
+  if (workout.week === 2 && pauses.length === 1) {
+    const pauseIndex = steps.findIndex(step => step.label === "Pause");
+    const firstBlock = steps.slice(0, pauseIndex);
+    const secondBlock = steps.slice(pauseIndex + 1);
+    const firstCount = firstBlock.filter(step => step.label === "Schneller Lauf").length;
+    const secondCount = secondBlock.filter(step => step.label === "Schneller Lauf").length;
+    const quickText = quick[0]?.text || "600 m";
+    const easyText = easy[0]?.text || "200 m";
+
+    return `${firstCount} × ${quickText} Schneller Lauf @ ${fastRange()} + ${easyText} Easy Lauf · ${secondsLabel(pauses[0].seconds)} Pause · ${secondCount} × ${quickText} Schneller Lauf @ ${fastRange()} + ${easyText} Easy Lauf`;
+  }
+
+  if (workout.week === 3 && quick.length) {
+    return `${quick.length} × ${quick[0].text} Schneller Lauf @ ${fastRange()} · ${secondsLabel(pauses[0]?.seconds || 0)} Pause`;
+  }
+
+  if (workout.week === 4 && quick.length) {
+    const rounds = quick.map(step => {
+      const match = step.text.match(/^(\d+)/);
+      return match ? match[1] : step.text;
+    }).join("–");
+    const pauseText = pauses.map(step => (step.seconds || 0) / 60).join("/");
+    return `${rounds} Runden Schneller Lauf @ ${fastRange()} · Pausen ${pauseText} min`;
+  }
+
+  if (workout.week === 5 && threshold.length) {
+    const durations = threshold.map(step => Math.round((step.seconds || 0) / 60)).join("–");
+    return `${durations} min @ ${thresholdRange()} · je ${secondsLabel(activePauses[0]?.seconds || 0)} Active Pause`;
+  }
+
+  if (workout.week === 6 && quick.length) {
+    return `${quick.length} × ${quick[0].text} Schneller Lauf @ ${fastRange()} · ${secondsLabel(pauses[0]?.seconds || 0)} Pause`;
+  }
+
+  return steps.map(step => step.text).join(" · ");
+}
+
+function enhancedMain(workout) {
+  return summaryFromSteps(workout);
 }
 function formatTime(seconds) {
   return `${String(Math.floor(seconds / 60)).padStart(2, "0")}:${String(seconds % 60).padStart(2, "0")}`;
@@ -181,7 +237,7 @@ function renderWeekButtons() {
 function stepsHtml(workout) {
   return workout.steps.map(step => {
     let pace = "";
-    if (step.label === "Fast") pace = ` <span class="pace-tag">@ ${fastRange()}</span>`;
+    if (step.label === "Schneller Lauf") pace = ` <span class="pace-tag">@ ${fastRange()}</span>`;
     if (step.label === "Threshold") pace = ` <span class="pace-tag">@ ${thresholdRange()}</span>`;
     return `<li><strong>${step.label}</strong> – ${step.text}${pace}</li>`;
   }).join("");
@@ -302,7 +358,7 @@ function updateTimer() {
   }
 
   let info = step.text;
-  if (step.label === "Fast") info += ` · Ziel: ${fastRange()}`;
+  if (step.label === "Schneller Lauf") info += ` · Ziel: ${fastRange()}`;
   if (step.label === "Threshold") info += ` · Ziel: ${thresholdRange()}`;
 
   if (step.type === "distance" && trainingActive) {

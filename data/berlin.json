@@ -265,8 +265,8 @@
         {
           "label": "Pause",
           "type": "time",
-          "seconds": 60,
-          "text": "1 min"
+          "text": "1 min",
+          "seconds": 60
         },
         {
           "label": "Schneller Lauf",
