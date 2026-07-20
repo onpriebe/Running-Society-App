@@ -2,132 +2,126 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Running Society – Berlin Intervals</title>
   <meta name="description" content="Running Society Intervalltraining mit Timer, individuellen Paces und Streckenkarten.">
-  <meta name="theme-color" content="#111827">
+  <meta name="theme-color" content="#000000">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Running Society">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=2.0.12">
+  <link rel="stylesheet" href="styles.css?v=2.0.13">
 </head>
 <body>
   <section class="start-screen" aria-label="Aktuelles Training">
-    <div class="start-topbar">
-      <div class="start-brand">
-        <img class="start-logo" src="icons/rs_icon_weiss.svg" alt="Running Society Logo">
-        <span><strong>Running Society</strong><small id="appTitle">Berlin Intervals</small></span>
+    <header class="app-header">
+      <div class="brand-lockup">
+        <img class="brand-logo" src="icons/rs_icon_weiss.svg" alt="Running Society Logo">
+        <span class="brand-copy"><strong>Running Society</strong><small>Berlin</small></span>
       </div>
-      <div class="start-actions">
-        <button type="button" id="shareBtn" class="icon-btn" aria-label="Training teilen">↗</button>
-        <button type="button" id="themeBtn" class="icon-btn" aria-label="Light- oder Dark-Mode wechseln">◐</button>
+      <div class="header-actions">
+        <button type="button" id="shareBtn" class="header-icon" aria-label="Training teilen" title="Training teilen">↗</button>
+        <button type="button" id="themeBtn" class="header-icon" aria-label="Darstellung wechseln" title="Darstellung wechseln">◐</button>
       </div>
-    </div>
+    </header>
 
     <div class="start-content">
-      <div class="start-kicker" id="currentBadge">Diese Woche</div>
+      <div class="start-kicker" id="currentBadge">Heute</div>
+      <div class="start-date" id="currentDate"></div>
+      <span class="start-week" id="currentWeek">Woche 1</span>
       <h1 id="currentTitle"></h1>
       <p class="start-goal" id="currentGoal"></p>
-      <span class="start-week" id="currentWeek">Woche 1</span>
+      <div class="title-rule" aria-hidden="true"></div>
 
       <div class="start-facts">
         <div class="start-fact">
-          <span class="fact-icon">⌖</span>
-          <span class="fact-label">Treffpunkt</span>
-          <strong id="currentMeeting"></strong>
+          <span class="fact-icon" aria-hidden="true">⌖</span>
+          <div class="fact-copy"><span class="fact-label">Treffpunkt</span><strong id="currentMeeting"></strong></div>
+          <span class="fact-side" id="currentMeetingTime">19:00 Uhr</span>
         </div>
         <div class="start-fact">
-          <span class="fact-icon">↯</span>
-          <span class="fact-label">Main Set</span>
-          <strong id="currentMain"></strong>
+          <span class="fact-icon" aria-hidden="true">♨</span>
+          <div class="fact-copy"><span class="fact-label">Main Set</span><strong id="currentMain"></strong></div>
+          <span class="fact-side" id="currentDuration"></span>
         </div>
-        <div class="start-fact pace-fact">
-          <span class="fact-icon">◷</span>
-          <span class="fact-label">Pace-Fokus</span>
-          <strong id="currentPace"></strong>
-          <button type="button" id="heroPaceBtn" class="pace-edit-btn">Pace anpassen</button>
-        </div>
+        <button type="button" id="heroPaceBtn" class="start-fact pace-fact">
+          <span class="fact-icon" aria-hidden="true">◷</span>
+          <div class="fact-copy"><span class="fact-label">Pace Fokus</span><strong id="currentPace"></strong><small>Deine Zielpace für heute</small></div>
+        </button>
       </div>
 
-      <button type="button" id="heroStartBtn" class="primary-start">▶ Training starten</button>
-      <button type="button" id="scrollDetailsBtn" class="scroll-cue" aria-label="Details anzeigen">⌄</button>
+      <button type="button" id="heroStartBtn" class="primary-start"><span aria-hidden="true">▶</span> Training starten</button>
     </div>
+    <button type="button" id="scrollDetailsBtn" class="scroll-cue" aria-label="Details anzeigen">⌄</button>
   </section>
 
-  <main id="appContent">
-    <section class="details-head">
-      <div>
-        <div class="kicker">Trainingsplan</div>
-        <h2>Alle Details</h2>
+  <main id="appContent" class="details-screen">
+    <header class="details-header">
+      <div class="brand-lockup compact">
+        <img class="brand-logo" src="icons/rs_icon_weiss.svg" alt="">
+        <span class="brand-copy"><strong>Running Society</strong><small>Berlin</small></span>
       </div>
-      <nav class="bar" id="weekButtons" aria-label="Trainingswochen"></nav>
+      <button type="button" id="scrollTopBtn" class="details-cue" aria-label="Zum Startbildschirm">⌃</button>
+    </header>
+
+    <section class="detail-card workout-card">
+      <h2>Workout</h2>
+      <div id="workoutTimeline" class="workout-timeline"></div>
     </section>
 
-    <section class="dashboard">
-      <article class="panel">
-        <span class="badge">Aktuelle Einheit</span>
-        <h2 id="detailsTitle"></h2>
-        <p class="subtitle" id="currentSummary"></p>
-      </article>
-
-      <article class="panel" id="paceProfile">
-        <h2>Pace-Fokus</h2>
-        <p class="subtitle">Trage hier deine 5-km- und Threshold-Pace ein. Daraus berechnet die App deine Zielbereiche.</p>
+    <section class="detail-card pace-card" id="paceProfile">
+      <div class="card-title-row"><h2>Pace Fokus</h2><span class="info-icon" title="Die Paces werden nur in diesem Browser gespeichert.">i</span></div>
+      <div class="pace-current-grid">
+        <div><span>Ziel Pace</span><strong id="detailTargetPace"></strong><small>min/km</small></div>
+        <div><span>Bereich</span><strong id="detailPaceRange"></strong><small>min/km</small></div>
+      </div>
+      <button type="button" id="togglePaceForm" class="secondary-action">✎ Pace anpassen</button>
+      <div class="pace-form" id="paceForm" hidden>
         <div class="tools">
-          <label class="tool">
-            <span class="label">5k Pace</span>
-            <input id="pace5k" type="text" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="z. B. 4:30 oder 430">
-            <span class="small">Schneller Lauf ≈ 5k-Pace</span>
-          </label>
-          <label class="tool">
-            <span class="label">Threshold</span>
-            <input id="paceThreshold" type="text" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="z. B. 4:50 oder 450">
-            <span class="small">Schwelle / kontrolliert hart</span>
-          </label>
+          <label class="tool"><span class="label">5k Pace</span><input id="pace5k" type="text" inputmode="text" autocomplete="off" placeholder="z. B. 4:30 oder 430"><span class="small">Für schnelle Intervalle</span></label>
+          <label class="tool"><span class="label">Threshold</span><input id="paceThreshold" type="text" inputmode="text" autocomplete="off" placeholder="z. B. 4:50 oder 450"><span class="small">Für Schwelleneinheiten</span></label>
         </div>
         <div class="result" id="paceResult">Trage eine Pace ein.</div>
-        <div class="bar"><button type="button" id="savePacesBtn">Paces speichern</button></div>
+        <button type="button" id="savePacesBtn" class="secondary-action solid">Paces speichern</button>
         <p class="small">Die Werte werden ausschließlich in diesem Browser gespeichert.</p>
-      </article>
+      </div>
     </section>
 
-    <section class="grid" id="cards" aria-label="Trainingsplan"></section>
+    <section class="detail-card route-card">
+      <h2>Treffpunkt &amp; Route</h2>
+      <div class="route-content">
+        <img id="currentRouteImage" class="route-thumb" src="" alt="Streckenkarte">
+        <div><strong id="routeMeeting"></strong><p id="routeAddress">An der Friedrichsbrücke<br>10178 Berlin</p><a class="route-link" id="routeLink" href="#" target="_blank" rel="noopener">Route anzeigen ›</a></div>
+      </div>
+    </section>
+
+    <section class="detail-card action-row">
+      <span class="strava-mark">⌁</span><div><strong>Strava</strong><small>Training aufzeichnen &amp; Text kopieren</small></div><button type="button" id="copyStravaQuick" aria-label="Strava-Text kopieren">›</button>
+    </section>
+
+    <section class="detail-card action-row">
+      <span class="calendar-mark">▦</span><div><strong>Trainingsplan</strong><small>Alle 6 Wochen im Überblick</small></div><button type="button" id="togglePlanBtn" aria-label="Trainingsplan anzeigen">›</button>
+    </section>
+
+    <section class="training-plan" id="trainingPlan" hidden>
+      <nav class="week-tabs" id="weekButtons" aria-label="Trainingswochen"></nav>
+      <div class="grid" id="cards" aria-label="Trainingsplan"></div>
+    </section>
+
+    <button type="button" id="detailsStartBtn" class="primary-start sticky-start"><span aria-hidden="true">▶</span> Training starten</button>
 
     <section class="timer" id="timerSection">
       <h2>Intervall-Timer</h2>
-      <p class="subtitle">Warm-up, Cool-down und Distanzabschnitte bestätigst du manuell. Zeitbasierte Intervalle und Pausen laufen automatisch weiter.</p>
-
-      <div class="display" aria-live="polite">
-        <div id="timerLabel">Training wird geladen</div>
-        <div id="timerTime">00:00</div>
-        <div id="timerInfo">Bereit</div>
-        <div class="progress"><div id="progressFill"></div></div>
-      </div>
-
-      <div class="bar timer-controls">
-        <button type="button" id="startBtn">Start</button>
-        <button type="button" id="pauseBtn">Pause</button>
-        <button type="button" id="nextBtn">Nächster Schritt</button>
-        <button type="button" id="resetBtn">Reset</button>
-        <button type="button" id="finishBtn">Training beenden</button>
-      </div>
-
-      <div class="finish-box">
-        <h2>Strava-Text</h2>
-        <p class="small">Nach dem Lauf kopieren und in die Strava-Beschreibung einfügen.</p>
-        <textarea id="stravaBox" readonly></textarea>
-        <div class="bar"><button type="button" id="copyStravaBtn">Für Strava kopieren</button></div>
-      </div>
+      <p class="subtitle">Distanzabschnitte bestätigst du manuell. Zeitintervalle und Pausen laufen automatisch weiter.</p>
+      <div class="display" aria-live="polite"><div id="timerLabel">Training wird geladen</div><div id="timerTime">00:00</div><div id="timerInfo">Bereit</div><div class="progress"><div id="progressFill"></div></div></div>
+      <div class="timer-controls"><button type="button" id="startBtn">Start</button><button type="button" id="pauseBtn">Pause</button><button type="button" id="nextBtn">Nächster Schritt</button><button type="button" id="resetBtn">Reset</button><button type="button" id="finishBtn">Training beenden</button></div>
+      <div class="finish-box"><h2>Strava-Text</h2><textarea id="stravaBox" readonly></textarea><button type="button" id="copyStravaBtn" class="secondary-action solid">Für Strava kopieren</button></div>
     </section>
   </main>
 
-  <footer>easy = sehr locker · fast = ca. 5k-Pace / RPE 8–9 · threshold = kontrolliert hart / RPE 7–8</footer>
-
-  <script src="app.js?v=2.0.12" defer></script>
+  <script src="app.js?v=2.0.13" defer></script>
 </body>
 </html>

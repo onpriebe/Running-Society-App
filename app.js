@@ -274,19 +274,73 @@ function renderCards() {
       </article>`;
   }).join("");
 }
+function formatCurrentDate() {
+  return new Intl.DateTimeFormat("de-DE", { weekday:"long", day:"2-digit", month:"long" }).format(new Date());
+}
+function displayPaceRange(workout) {
+  const raw = workout.paceMode === "threshold" ? thresholdRange() : fastRange();
+  return raw.replaceAll("/km", "").replace("–", " – ");
+}
+function heroMain(workout) {
+  const quick = workout.steps.filter(step => step.label === "Schneller Lauf");
+  const threshold = workout.steps.filter(step => step.label === "Threshold");
+  if (quick.length) {
+    const text = quick[0].text.replace(/ schnell(er Lauf)?/i, "").trim();
+    return `${quick.length} × ${text}`;
+  }
+  if (threshold.length) return `${threshold.length} Intervalle`;
+  return workout.main;
+}
+function estimatedDuration(workout) {
+  const distances = workout.steps.reduce((sum, step) => {
+    const m = step.text.match(/([\d,.]+)\s*(km|m)\b/i);
+    if (!m) return sum;
+    let n = Number(m[1].replace(".", "").replace(",", "."));
+    if (m[2].toLowerCase() === "m") n /= 1000;
+    return sum + n;
+  }, 0);
+  if (!distances) return "ca. 60–70 min";
+  const low = Math.max(35, Math.round(distances * 5.7 / 5) * 5);
+  const high = Math.max(low + 10, Math.round(distances * 6.5 / 5) * 5);
+  return `ca. ${low}–${high} min`;
+}
+function timelineHtml(workout) {
+  const rows = [];
+  const warm = workout.steps.find(step => step.label === "Warm-up");
+  const cool = workout.steps.find(step => step.label === "Cool-down");
+  const quick = workout.steps.filter(step => step.label === "Schneller Lauf");
+  const threshold = workout.steps.filter(step => step.label === "Threshold");
+  const pauses = workout.steps.filter(step => step.label === "Pause" || step.label === "Active pause");
+  if (warm) rows.push([warm.text.replace(/ easy Lauf/i,""), "Einlaufen", "Easy Pace"]);
+  if (quick.length) rows.push([`${quick.length} × ${quick[0].text.replace(/ schnell/i,"")}`, `@ ${fastRange().replaceAll("/km", "")}`, "schnell"]);
+  if (threshold.length) rows.push([`${threshold.length} Intervalle`, `@ ${thresholdRange().replaceAll("/km", "")}`, "Threshold"]);
+  if (pauses.length) rows.push([pauses[0].text, pauses[0].label === "Active pause" ? "Aktive Erholung" : "Trabpause", "Easy Pace"]);
+  if (cool) rows.push([cool.text.replace(/ easy Lauf| cool down/i,""), "Auslaufen", "Easy Pace"]);
+  return rows.map(([main,sub,side]) => `<div class="timeline-row"><span class="timeline-dot"></span><div class="timeline-main"><strong>${main}</strong><small>${sub}</small></div><span class="timeline-side">${side}</span></div>`).join("");
+}
+
 function updateCurrentPanel() {
   const workout = workouts[selected];
   const isCurrent = selected === currentCycleWeek() - 1;
-  $("currentBadge").textContent = isCurrent ? "Diese Woche" : "Ausgewählt";
+  $("currentBadge").textContent = isCurrent ? "Heute" : "Ausgewählt";
+  $("currentDate").textContent = formatCurrentDate();
   $("currentTitle").textContent = workout.title;
   $("currentGoal").textContent = workout.goal;
   $("currentWeek").textContent = `Woche ${workout.week}`;
   $("currentMeeting").textContent = config.meetingPointName;
-  $("currentMain").textContent = enhancedMain(workout);
-  $("currentPace").textContent = workout.paceMode === "threshold" ? thresholdRange() : fastRange();
-  $("detailsTitle").textContent = `Woche ${workout.week}: ${workout.title}`;
-  $("currentSummary").textContent = `${workout.goal} · ${enhancedMain(workout)} · ${dynamicPace(workout)}`;
+  $("currentMeetingTime").textContent = config.meetingTime || "19:00 Uhr";
+  $("currentMain").textContent = heroMain(workout);
+  $("currentDuration").textContent = estimatedDuration(workout);
+  $("currentPace").textContent = displayPaceRange(workout) + " min/km";
+  $("workoutTimeline").innerHTML = timelineHtml(workout);
+  $("detailTargetPace").textContent = displayPaceRange(workout);
+  $("detailPaceRange").textContent = displayPaceRange(workout);
+  $("routeMeeting").textContent = config.meetingPointName;
+  $("currentRouteImage").src = workout.image;
+  $("currentRouteImage").alt = `Strecke ${workout.title}`;
+  $("routeLink").href = config.meetingPointUrl;
 }
+
 function renderAll() {
   renderWeekButtons();
   renderCards();
@@ -565,10 +619,26 @@ function bindEvents() {
   });
 
   $("heroStartBtn").addEventListener("click", () => beginTraining(selected));
+  $("detailsStartBtn").addEventListener("click", () => beginTraining(selected));
   $("shareBtn").addEventListener("click", () => copyText(workoutText(workouts[selected])));
   $("themeBtn").addEventListener("click", toggleTheme);
   $("scrollDetailsBtn").addEventListener("click", () => $("appContent").scrollIntoView({ behavior:"smooth" }));
-  $("heroPaceBtn").addEventListener("click", () => $("paceProfile").scrollIntoView({ behavior:"smooth", block:"center" }));
+  $("scrollTopBtn").addEventListener("click", () => window.scrollTo({ top:0, behavior:"smooth" }));
+  $("heroPaceBtn").addEventListener("click", () => {
+    $("paceForm").hidden = false;
+    $("appContent").scrollIntoView({ behavior:"smooth" });
+    setTimeout(() => $("paceProfile").scrollIntoView({ behavior:"smooth", block:"center" }), 350);
+  });
+  $("togglePaceForm").addEventListener("click", () => { $("paceForm").hidden = !$("paceForm").hidden; });
+  $("togglePlanBtn").addEventListener("click", () => {
+    $("trainingPlan").hidden = !$("trainingPlan").hidden;
+    if (!$("trainingPlan").hidden) $("trainingPlan").scrollIntoView({ behavior:"smooth", block:"start" });
+  });
+  $("copyStravaQuick").addEventListener("click", async () => {
+    await copyText(stravaText());
+    $("copyStravaQuick").textContent = "✓";
+    setTimeout(() => { $("copyStravaQuick").textContent = "›"; }, 1400);
+  });
   $("pace5k").addEventListener("input", calculatePaces);
   $("paceThreshold").addEventListener("input", calculatePaces);
   $("pace5k").addEventListener("blur", () => formatPaceField($("pace5k"), userPaces.fiveK));
@@ -626,7 +696,6 @@ async function init() {
     config = await response.json();
     workouts = config.workouts;
 
-    $("appTitle").textContent = config.appTitle;
     document.title = `Running Society – ${config.appTitle}`;
 
     const current = currentCycleWeek();
