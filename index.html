@@ -14,37 +14,75 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=2.0.9">
+  <link rel="stylesheet" href="styles.css?v=2.0.12">
 </head>
 <body>
-  <header class="hero">
-    <div class="kicker">Running Society</div>
-    <h1 id="appTitle">Berlin Intervals</h1>
-    <div class="brand-sub">6 Wochen Intervallplan</div>
-    <p class="subtitle">Aktuelle Einheit auswählen, persönliche Pace hinterlegen und das Training direkt steuern.</p>
-    <nav class="bar" id="weekButtons" aria-label="Trainingswochen"></nav>
-  </header>
+  <section class="start-screen" aria-label="Aktuelles Training">
+    <div class="start-topbar">
+      <div class="start-brand">
+        <img class="start-logo" src="icons/rs_icon_weiss.svg" alt="Running Society Logo">
+        <span><strong>Running Society</strong><small id="appTitle">Berlin Intervals</small></span>
+      </div>
+      <div class="start-actions">
+        <button type="button" id="shareBtn" class="icon-btn" aria-label="Training teilen">↗</button>
+        <button type="button" id="themeBtn" class="icon-btn" aria-label="Light- oder Dark-Mode wechseln">◐</button>
+      </div>
+    </div>
 
-  <main>
+    <div class="start-content">
+      <div class="start-kicker" id="currentBadge">Diese Woche</div>
+      <h1 id="currentTitle"></h1>
+      <p class="start-goal" id="currentGoal"></p>
+      <span class="start-week" id="currentWeek">Woche 1</span>
+
+      <div class="start-facts">
+        <div class="start-fact">
+          <span class="fact-icon">⌖</span>
+          <span class="fact-label">Treffpunkt</span>
+          <strong id="currentMeeting"></strong>
+        </div>
+        <div class="start-fact">
+          <span class="fact-icon">↯</span>
+          <span class="fact-label">Main Set</span>
+          <strong id="currentMain"></strong>
+        </div>
+        <div class="start-fact pace-fact">
+          <span class="fact-icon">◷</span>
+          <span class="fact-label">Pace-Fokus</span>
+          <strong id="currentPace"></strong>
+          <button type="button" id="heroPaceBtn" class="pace-edit-btn">Pace anpassen</button>
+        </div>
+      </div>
+
+      <button type="button" id="heroStartBtn" class="primary-start">▶ Training starten</button>
+      <button type="button" id="scrollDetailsBtn" class="scroll-cue" aria-label="Details anzeigen">⌄</button>
+    </div>
+  </section>
+
+  <main id="appContent">
+    <section class="details-head">
+      <div>
+        <div class="kicker">Trainingsplan</div>
+        <h2>Alle Details</h2>
+      </div>
+      <nav class="bar" id="weekButtons" aria-label="Trainingswochen"></nav>
+    </section>
+
     <section class="dashboard">
       <article class="panel">
-        <span class="badge" id="currentBadge">Diese Woche</span>
-        <h2 id="currentTitle"></h2>
+        <span class="badge">Aktuelle Einheit</span>
+        <h2 id="detailsTitle"></h2>
         <p class="subtitle" id="currentSummary"></p>
-        <div class="bar">
-          <button type="button" id="heroStartBtn">🏃 Training starten</button>
-          <button type="button" id="shareBtn">Training teilen</button>
-          <button type="button" id="themeBtn">Light/Dark</button>
-        </div>
       </article>
 
-      <article class="panel">
-        <h2>Mein Pace-Profil</h2>
+      <article class="panel" id="paceProfile">
+        <h2>Pace-Fokus</h2>
+        <p class="subtitle">Trage hier deine 5-km- und Threshold-Pace ein. Daraus berechnet die App deine Zielbereiche.</p>
         <div class="tools">
           <label class="tool">
             <span class="label">5k Pace</span>
             <input id="pace5k" type="text" inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="z. B. 4:30 oder 430">
-            <span class="small">Fast ≈ 5k-Pace</span>
+            <span class="small">Schneller Lauf ≈ 5k-Pace</span>
           </label>
           <label class="tool">
             <span class="label">Threshold</span>
@@ -90,6 +128,6 @@
 
   <footer>easy = sehr locker · fast = ca. 5k-Pace / RPE 8–9 · threshold = kontrolliert hart / RPE 7–8</footer>
 
-  <script src="app.js?v=2.0.9" defer></script>
+  <script src="app.js?v=2.0.12" defer></script>
 </body>
 </html>

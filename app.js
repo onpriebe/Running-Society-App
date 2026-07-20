@@ -276,10 +276,15 @@ function renderCards() {
 }
 function updateCurrentPanel() {
   const workout = workouts[selected];
-  $("currentBadge").textContent = selected === currentCycleWeek() - 1
-    ? `Diese Woche: Woche ${workout.week}`
-    : `Ausgewählt: Woche ${workout.week}`;
+  const isCurrent = selected === currentCycleWeek() - 1;
+  $("currentBadge").textContent = isCurrent ? "Diese Woche" : "Ausgewählt";
   $("currentTitle").textContent = workout.title;
+  $("currentGoal").textContent = workout.goal;
+  $("currentWeek").textContent = `Woche ${workout.week}`;
+  $("currentMeeting").textContent = config.meetingPointName;
+  $("currentMain").textContent = enhancedMain(workout);
+  $("currentPace").textContent = workout.paceMode === "threshold" ? thresholdRange() : fastRange();
+  $("detailsTitle").textContent = `Woche ${workout.week}: ${workout.title}`;
   $("currentSummary").textContent = `${workout.goal} · ${enhancedMain(workout)} · ${dynamicPace(workout)}`;
 }
 function renderAll() {
@@ -562,6 +567,8 @@ function bindEvents() {
   $("heroStartBtn").addEventListener("click", () => beginTraining(selected));
   $("shareBtn").addEventListener("click", () => copyText(workoutText(workouts[selected])));
   $("themeBtn").addEventListener("click", toggleTheme);
+  $("scrollDetailsBtn").addEventListener("click", () => $("appContent").scrollIntoView({ behavior:"smooth" }));
+  $("heroPaceBtn").addEventListener("click", () => $("paceProfile").scrollIntoView({ behavior:"smooth", block:"center" }));
   $("pace5k").addEventListener("input", calculatePaces);
   $("paceThreshold").addEventListener("input", calculatePaces);
   $("pace5k").addEventListener("blur", () => formatPaceField($("pace5k"), userPaces.fiveK));

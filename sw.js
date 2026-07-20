@@ -1,4 +1,4 @@
-const CACHE_NAME = "running-society-github-v2-0-9";
+const CACHE_NAME = "running-society-github-v2-0-12";
 const CORE_ASSETS = [
   "./",
   "index.html",
@@ -10,6 +10,7 @@ const CORE_ASSETS = [
   "icons/icon-512.png",
   "icons/apple-touch-icon.png",
   "icons/favicon-32.png",
+  "icons/rs_icon_weiss.svg",
   "images/woche1.png",
   "images/woche2.png",
   "images/woche3.png",
