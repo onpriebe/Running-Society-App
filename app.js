@@ -517,20 +517,18 @@ function advanceStep() {
     speak(`${step.label}. ${step.text}. Danach den passenden Beendet-Button drücken.`);
   }
 }
-function resetTimer() {
-  stopTimer();
-  trainingActive = false;
-  disableWakeLock();
-  timerIndex = 0;
-  setCurrentStepTime();
-  updateTimer();
-}
 function finishTraining() {
   stopTimer();
   trainingActive = false;
   disableWakeLock();
   vibrate([200,100,200]);
   updateStravaText();
+
+  // Training vollständig in den Ausgangszustand zurücksetzen.
+  timerIndex = 0;
+  setCurrentStepTime();
+  updateTimer();
+
   $("stravaBox").scrollIntoView({ behavior:"smooth", block:"center" });
   speak("Training beendet. Strava Text ist bereit.");
 }
@@ -664,7 +662,6 @@ function bindEvents() {
       advanceStep();
     }
   });
-  $("resetBtn").addEventListener("click", resetTimer);
   $("finishBtn").addEventListener("click", finishTraining);
   $("copyStravaBtn").addEventListener("click", () => copyText(stravaText()));
 
