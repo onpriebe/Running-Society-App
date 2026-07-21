@@ -388,12 +388,12 @@ function updateControlButtons(step) {
   }
 
   if (running) {
-    startBtn.textContent = "▶ Läuft";
+    startBtn.textContent = "Läuft";
     startBtn.disabled = true;
     pauseBtn.textContent = "Pause";
     pauseBtn.disabled = false;
   } else if (remaining < total && total > 0) {
-    startBtn.textContent = "⏸ Pausiert";
+    startBtn.textContent = "Pausiert";
     startBtn.disabled = true;
     pauseBtn.textContent = "Fortsetzen";
     pauseBtn.disabled = false;
