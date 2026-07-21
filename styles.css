@@ -92,3 +92,11 @@
 .details li strong{
   font-weight:700;
 }
+
+/* v2.0.22 – cleaner workout actions and timer control hierarchy */
+.timer-controls #startBtn{grid-column:1/-1;grid-row:1;background:var(--accent);border-color:var(--accent);color:var(--accent-text);font-weight:800}
+.timer-controls #pauseBtn{grid-column:1;grid-row:2}
+.timer-controls #nextBtn{grid-column:2;grid-row:2}
+.timer-controls #finishBtn{grid-column:1/-1;grid-row:3;background:#fff;border-color:#fff;color:#000;font-weight:800}
+.card-body .bar{display:block}
+.card-body .bar [data-details]{width:auto}

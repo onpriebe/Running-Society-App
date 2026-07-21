@@ -266,8 +266,6 @@ function renderCards() {
           <div class="row"><div class="label">Deine Pace</div><div class="value">${dynamicPace(workout)}</div></div>
           <div class="bar">
             <button type="button" data-details="${index}">${expandedDetails === index ? "Details ausblenden" : "Details"}</button>
-            <button type="button" data-start-week="${index}">Training starten</button>
-            <button type="button" data-share-week="${index}">Training teilen</button>
           </div>
           <div class="details ${expandedDetails === index ? "show" : ""}"><ol>${stepsHtml(workout)}</ol></div>
         </div>
