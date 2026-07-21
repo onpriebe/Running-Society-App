@@ -2,6 +2,10 @@
 
 Mobile Progressive Web App für den 6‑Wochen-Intervallplan der Running Society Berlin.
 
+## Version 2.1.0
+
+Stabile Release-Version mit finalisiertem Design und vollständiger Kernfunktionalität.
+
 ## Funktionen
 
 - automatische 6‑Wochen-Rotation
@@ -47,7 +51,7 @@ Die Trainings, der Treffpunkt und der Beginn des 6‑Wochen-Zyklus stehen in:
 
 Wichtige Felder:
 
-- `cycleStart`: Mittwoch, an dem Woche 1 beginnt
+- `cycleStart`: Montag, an dem Woche 1 beginnt
 - `meetingPointName`
 - `meetingPointUrl`
 - `workouts`
