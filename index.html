@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=2.0.16">
+  <link rel="stylesheet" href="styles.css?v=2.0.17">
 </head>
 <body>
   <section class="start-screen" aria-label="Aktuelles Training">
@@ -61,6 +61,8 @@
       <button type="button" id="scrollTopBtn" class="details-cue" aria-label="Zum Startbildschirm">⌃</button>
     </header>
 
+    <nav class="week-tabs week-selector" id="weekButtons" aria-label="Training auswählen"></nav>
+
     <section class="detail-card workout-card">
       <h2>Workout</h2>
       <div id="workoutTimeline" class="workout-timeline"></div>
@@ -94,8 +96,6 @@
       </div>
     </section>
 
-    <nav class="week-tabs week-selector" id="weekButtons" aria-label="Training auswählen"></nav>
-
     <section class="detail-card action-row">
       <span class="calendar-mark">▦</span><div><strong>Trainingsplan</strong><small>Alle 6 Wochen im Überblick</small></div><button type="button" id="togglePlanBtn" aria-label="Trainingsplan anzeigen">›</button>
     </section>
@@ -110,7 +110,12 @@
       <p class="subtitle">Distanzabschnitte bestätigst du manuell. Zeitintervalle und Pausen laufen automatisch weiter.</p>
       <div class="display" aria-live="polite"><div id="timerLabel">Training wird geladen</div><div id="timerTime">00:00</div><div id="timerInfo">Bereit</div><div class="progress"><div id="progressFill"></div></div></div>
       <div class="timer-controls"><button type="button" id="startBtn">Start</button><button type="button" id="pauseBtn">Pause</button><button type="button" id="nextBtn">Nächster Schritt</button><button type="button" id="resetBtn">Reset</button><button type="button" id="finishBtn">Training beenden</button></div>
-      <div class="finish-box"><h2 class="strava-heading"><svg class="strava-heading-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.2 3 5.5 18h5l2.7-5.3 2.7 5.3h5L13.2 3Zm7.4 13-4.3 8.5h3.2l1.1-2.2 1.2 2.2H25L20.6 16Z"/></svg><span>Strava-Text</span></h2><textarea id="stravaBox" readonly></textarea><button type="button" id="copyStravaBtn" class="secondary-action solid">Für Strava kopieren</button></div>
+    </section>
+
+    <section class="finish-box" aria-labelledby="stravaHeading">
+      <h2 class="strava-heading" id="stravaHeading"><svg class="strava-heading-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M13.2 3 5.5 18h5l2.7-5.3 2.7 5.3h5L13.2 3Zm7.4 13-4.3 8.5h3.2l1.1-2.2 1.2 2.2H25L20.6 16Z"/></svg><span>Strava-Text</span></h2>
+      <textarea id="stravaBox" readonly></textarea>
+      <button type="button" id="copyStravaBtn" class="secondary-action solid">Für Strava kopieren</button>
     </section>
   </main>
 
@@ -119,6 +124,6 @@
     <img id="routeDialogImage" src="" alt="Vergrößerte Streckenkarte">
   </dialog>
 
-  <script src="app.js?v=2.0.16" defer></script>
+  <script src="app.js?v=2.0.17" defer></script>
 </body>
 </html>

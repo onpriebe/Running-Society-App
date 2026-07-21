@@ -50,3 +50,9 @@
 .finish-box textarea{min-height:108px;font-size:13px;line-height:1.45}
 .strava-heading{font-size:15px!important}
 .strava-heading-icon{width:23px;height:23px}
+
+
+/* UI refinements v2.0.17 */
+.week-selector{margin:0 0 12px}
+.finish-box{margin-top:34px;padding-top:0}
+.finish-box .strava-heading{margin:0 0 12px}
