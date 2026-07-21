@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=2.0.13">
+  <link rel="stylesheet" href="styles.css?v=2.0.14">
 </head>
 <body>
   <section class="start-screen" aria-label="Aktuelles Training">
@@ -22,14 +22,9 @@
         <img class="brand-logo" src="icons/rs_icon_weiss.svg" alt="Running Society Logo">
         <span class="brand-copy"><strong>Running Society</strong><small>Berlin</small></span>
       </div>
-      <div class="header-actions">
-        <button type="button" id="shareBtn" class="header-icon" aria-label="Training teilen" title="Training teilen">↗</button>
-        <button type="button" id="themeBtn" class="header-icon" aria-label="Darstellung wechseln" title="Darstellung wechseln">◐</button>
-      </div>
     </header>
 
     <div class="start-content">
-      <div class="start-kicker" id="currentBadge">Heute</div>
       <div class="start-date" id="currentDate"></div>
       <span class="start-week" id="currentWeek">Woche 1</span>
       <h1 id="currentTitle"></h1>
@@ -45,7 +40,6 @@
         <div class="start-fact">
           <span class="fact-icon" aria-hidden="true">♨</span>
           <div class="fact-copy"><span class="fact-label">Main Set</span><strong id="currentMain"></strong></div>
-          <span class="fact-side" id="currentDuration"></span>
         </div>
         <button type="button" id="heroPaceBtn" class="start-fact pace-fact">
           <span class="fact-icon" aria-hidden="true">◷</span>
@@ -93,13 +87,11 @@
     <section class="detail-card route-card">
       <h2>Treffpunkt &amp; Route</h2>
       <div class="route-content">
-        <img id="currentRouteImage" class="route-thumb" src="" alt="Streckenkarte">
+        <button type="button" id="routePreviewBtn" class="route-preview" aria-label="Streckenkarte vergrößern">
+          <img id="currentRouteImage" class="route-thumb" src="" alt="Streckenkarte">
+        </button>
         <div><strong id="routeMeeting"></strong><p id="routeAddress">An der Friedrichsbrücke<br>10178 Berlin</p><a class="route-link" id="routeLink" href="#" target="_blank" rel="noopener">Route anzeigen ›</a></div>
       </div>
-    </section>
-
-    <section class="detail-card action-row">
-      <span class="strava-mark">⌁</span><div><strong>Strava</strong><small>Training aufzeichnen &amp; Text kopieren</small></div><button type="button" id="copyStravaQuick" aria-label="Strava-Text kopieren">›</button>
     </section>
 
     <section class="detail-card action-row">
@@ -122,6 +114,11 @@
     </section>
   </main>
 
-  <script src="app.js?v=2.0.13" defer></script>
+  <dialog id="routeDialog" class="route-dialog">
+    <button type="button" id="closeRouteDialog" class="route-dialog-close" aria-label="Karte schließen">×</button>
+    <img id="routeDialogImage" src="" alt="Vergrößerte Streckenkarte">
+  </dialog>
+
+  <script src="app.js?v=2.0.14" defer></script>
 </body>
 </html>

@@ -321,16 +321,13 @@ function timelineHtml(workout) {
 
 function updateCurrentPanel() {
   const workout = workouts[selected];
-  const isCurrent = selected === currentCycleWeek() - 1;
-  $("currentBadge").textContent = isCurrent ? "Heute" : "Ausgewählt";
   $("currentDate").textContent = formatCurrentDate();
   $("currentTitle").textContent = workout.title;
   $("currentGoal").textContent = workout.goal;
   $("currentWeek").textContent = `Woche ${workout.week}`;
   $("currentMeeting").textContent = config.meetingPointName;
-  $("currentMeetingTime").textContent = config.meetingTime || "19:00 Uhr";
+  $("currentMeetingTime").textContent = config.meetingTime || "18:30 Uhr";
   $("currentMain").textContent = heroMain(workout);
-  $("currentDuration").textContent = estimatedDuration(workout);
   $("currentPace").textContent = displayPaceRange(workout) + " min/km";
   $("workoutTimeline").innerHTML = timelineHtml(workout);
   $("detailTargetPace").textContent = displayPaceRange(workout);
@@ -338,6 +335,8 @@ function updateCurrentPanel() {
   $("routeMeeting").textContent = config.meetingPointName;
   $("currentRouteImage").src = workout.image;
   $("currentRouteImage").alt = `Strecke ${workout.title}`;
+  $("routeDialogImage").src = workout.image;
+  $("routeDialogImage").alt = `Vergrößerte Strecke ${workout.title}`;
   $("routeLink").href = config.meetingPointUrl;
 }
 
@@ -620,10 +619,13 @@ function bindEvents() {
 
   $("heroStartBtn").addEventListener("click", () => beginTraining(selected));
   $("detailsStartBtn").addEventListener("click", () => beginTraining(selected));
-  $("shareBtn").addEventListener("click", () => copyText(workoutText(workouts[selected])));
-  $("themeBtn").addEventListener("click", toggleTheme);
   $("scrollDetailsBtn").addEventListener("click", () => $("appContent").scrollIntoView({ behavior:"smooth" }));
   $("scrollTopBtn").addEventListener("click", () => window.scrollTo({ top:0, behavior:"smooth" }));
+  $("routePreviewBtn").addEventListener("click", () => $("routeDialog").showModal());
+  $("closeRouteDialog").addEventListener("click", () => $("routeDialog").close());
+  $("routeDialog").addEventListener("click", event => {
+    if (event.target === $("routeDialog")) $("routeDialog").close();
+  });
   $("heroPaceBtn").addEventListener("click", () => {
     $("paceForm").hidden = false;
     $("appContent").scrollIntoView({ behavior:"smooth" });
@@ -633,11 +635,6 @@ function bindEvents() {
   $("togglePlanBtn").addEventListener("click", () => {
     $("trainingPlan").hidden = !$("trainingPlan").hidden;
     if (!$("trainingPlan").hidden) $("trainingPlan").scrollIntoView({ behavior:"smooth", block:"start" });
-  });
-  $("copyStravaQuick").addEventListener("click", async () => {
-    await copyText(stravaText());
-    $("copyStravaQuick").textContent = "✓";
-    setTimeout(() => { $("copyStravaQuick").textContent = "›"; }, 1400);
   });
   $("pace5k").addEventListener("input", calculatePaces);
   $("paceThreshold").addEventListener("input", calculatePaces);
@@ -702,8 +699,6 @@ async function init() {
     selected = Math.max(0, workouts.findIndex(workout => workout.week === current));
     timerSteps = workouts[selected].steps;
     setCurrentStepTime();
-
-    if (localStorage.getItem("rs_theme") === "light") document.documentElement.classList.add("light");
 
     initPaces();
     bindEvents();
