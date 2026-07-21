@@ -13,7 +13,7 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=2.0.15">
+  <link rel="stylesheet" href="styles.css?v=2.0.16">
 </head>
 <body>
   <section class="start-screen" aria-label="Aktuelles Training">
@@ -94,12 +94,13 @@
       </div>
     </section>
 
+    <nav class="week-tabs week-selector" id="weekButtons" aria-label="Training auswählen"></nav>
+
     <section class="detail-card action-row">
       <span class="calendar-mark">▦</span><div><strong>Trainingsplan</strong><small>Alle 6 Wochen im Überblick</small></div><button type="button" id="togglePlanBtn" aria-label="Trainingsplan anzeigen">›</button>
     </section>
 
     <section class="training-plan" id="trainingPlan" hidden>
-      <nav class="week-tabs" id="weekButtons" aria-label="Trainingswochen"></nav>
       <div class="grid" id="cards" aria-label="Trainingsplan"></div>
     </section>
 
@@ -118,6 +119,6 @@
     <img id="routeDialogImage" src="" alt="Vergrößerte Streckenkarte">
   </dialog>
 
-  <script src="app.js?v=2.0.15" defer></script>
+  <script src="app.js?v=2.0.16" defer></script>
 </body>
 </html>

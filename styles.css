@@ -38,3 +38,15 @@
 .timer-controls #finishBtn{background:#fff;border-color:#fff;color:#000;font-weight:800}
 .strava-heading{display:flex;align-items:center;gap:10px}
 .strava-heading-icon{width:26px;height:26px;flex:0 0 auto;fill:var(--orange)}
+
+
+/* UI refinements v2.0.16 */
+.week-selector{margin:12px 0 10px}
+.week-selector button{min-height:43px;font-size:13px}
+.training-plan{margin-top:10px}
+.timer{margin-top:26px;border:1px solid #303030;border-left:3px solid var(--accent);border-radius:12px;padding:16px;background:#0d0d0d}
+.timer>h2:first-child{margin-top:0;color:var(--accent);letter-spacing:.02em}
+.timer .subtitle{margin-bottom:16px}
+.finish-box textarea{min-height:108px;font-size:13px;line-height:1.45}
+.strava-heading{font-size:15px!important}
+.strava-heading-icon{width:23px;height:23px}
