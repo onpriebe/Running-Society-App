@@ -366,6 +366,11 @@ function updateControlButtons(step) {
 
   nextBtn.textContent = "Nächster Schritt";
 
+  // Pause und „Nächster Schritt“ gehören erst zum aktiven Training.
+  // Nach „Training beenden“ verschwinden beide wieder.
+  pauseBtn.classList.toggle("is-hidden", !trainingActive);
+  nextBtn.classList.toggle("is-hidden", !trainingActive);
+
   if (!step) {
     startBtn.textContent = "Fertig";
     startBtn.disabled = true;

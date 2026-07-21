@@ -100,3 +100,9 @@
 .timer-controls #finishBtn{grid-column:1/-1;grid-row:3;background:#fff;border-color:#fff;color:#000;font-weight:800}
 .card-body .bar{display:block}
 .card-body .bar [data-details]{width:auto}
+
+
+/* v2.0.23 – stable timer layout and progressive controls */
+.timer-controls .is-hidden{display:none}
+.display #timerTime{min-height:1.08em;display:flex;align-items:center;justify-content:center}
+.display #timerInfo{height:4.2em;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.35;overflow:hidden;padding:0 4px}
