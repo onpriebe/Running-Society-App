@@ -70,7 +70,7 @@ function easyRange() {
 }
 function dynamicPace(workout) {
   return workout.paceMode === "threshold"
-    ? `Threshold: ${thresholdRange()} · Active ⏸ Pause: locker traben`
+    ? `Threshold: ${thresholdRange()} · Active Pause: locker traben`
     : `Schneller Lauf: ${fastRange()} · Easy Lauf: ${easyRange()}`;
 }
 
@@ -92,16 +92,16 @@ function summaryFromSteps(workout) {
   const steps = mainSteps(workout);
   const quick = steps.filter(step => step.label === "Schneller Lauf");
   const easy = steps.filter(step => step.label === "Easy Lauf");
-  const pauses = steps.filter(step => step.label === "⏸ Pause");
+  const pauses = steps.filter(step => step.label === "Pause");
   const threshold = steps.filter(step => step.label === "Threshold");
-  const active⏸ Pauses = steps.filter(step => step.label === "Active pause");
+  const activePauses = steps.filter(step => step.label === "Active pause");
 
   if (workout.week === 1 && quick.length && easy.length) {
     return `${quick.length} × ${quick[0].text} @ ${fastRange()} / ${easy[0].text}`;
   }
 
   if (workout.week === 2 && pauses.length === 1) {
-    const pauseIndex = steps.findIndex(step => step.label === "⏸ Pause");
+    const pauseIndex = steps.findIndex(step => step.label === "Pause");
     const firstBlock = steps.slice(0, pauseIndex);
     const secondBlock = steps.slice(pauseIndex + 1);
     const firstCount = firstBlock.filter(step => step.label === "Schneller Lauf").length;
@@ -109,11 +109,11 @@ function summaryFromSteps(workout) {
     const quickText = quick[0]?.text || "600 m";
     const easyText = easy[0]?.text || "200 m";
 
-    return `${firstCount} × ${quickText} Schneller Lauf @ ${fastRange()} + ${easyText} Easy Lauf · ${secondsLabel(pauses[0].seconds)} ⏸ Pause · ${secondCount} × ${quickText} Schneller Lauf @ ${fastRange()} + ${easyText} Easy Lauf`;
+    return `${firstCount} × ${quickText} Schneller Lauf @ ${fastRange()} + ${easyText} Easy Lauf · ${secondsLabel(pauses[0].seconds)} Pause · ${secondCount} × ${quickText} Schneller Lauf @ ${fastRange()} + ${easyText} Easy Lauf`;
   }
 
   if (workout.week === 3 && quick.length) {
-    return `${quick.length} × ${quick[0].text} Schneller Lauf @ ${fastRange()} · ${secondsLabel(pauses[0]?.seconds || 0)} ⏸ Pause`;
+    return `${quick.length} × ${quick[0].text} Schneller Lauf @ ${fastRange()} · ${secondsLabel(pauses[0]?.seconds || 0)} Pause`;
   }
 
   if (workout.week === 4 && quick.length) {
@@ -122,16 +122,16 @@ function summaryFromSteps(workout) {
       return match ? match[1] : step.text;
     }).join("–");
     const pauseText = pauses.map(step => (step.seconds || 0) / 60).join("/");
-    return `${rounds} Runden Schneller Lauf @ ${fastRange()} · ⏸ Pausen ${pauseText} min`;
+    return `${rounds} Runden Schneller Lauf @ ${fastRange()} · Pausen ${pauseText} min`;
   }
 
   if (workout.week === 5 && threshold.length) {
     const durations = threshold.map(step => Math.round((step.seconds || 0) / 60)).join("–");
-    return `${durations} min @ ${thresholdRange()} · je ${secondsLabel(active⏸ Pauses[0]?.seconds || 0)} Active ⏸ Pause`;
+    return `${durations} min @ ${thresholdRange()} · je ${secondsLabel(activePauses[0]?.seconds || 0)} Active Pause`;
   }
 
   if (workout.week === 6 && quick.length) {
-    return `${quick.length} × ${quick[0].text} Schneller Lauf @ ${fastRange()} · ${secondsLabel(pauses[0]?.seconds || 0)} ⏸ Pause`;
+    return `${quick.length} × ${quick[0].text} Schneller Lauf @ ${fastRange()} · ${secondsLabel(pauses[0]?.seconds || 0)} Pause`;
   }
 
   return steps.map(step => step.text).join(" · ");
@@ -308,7 +308,7 @@ function timelineHtml(workout) {
   const cool = workout.steps.find(step => step.label === "Cool-down");
   const quick = workout.steps.filter(step => step.label === "Schneller Lauf");
   const threshold = workout.steps.filter(step => step.label === "Threshold");
-  const pauses = workout.steps.filter(step => step.label === "⏸ Pause" || step.label === "Active pause");
+  const pauses = workout.steps.filter(step => step.label === "Pause" || step.label === "Active pause");
   if (warm) rows.push([warm.text.replace(/ easy Lauf/i,""), "Einlaufen", "Easy Pace"]);
   if (quick.length) rows.push([`${quick.length} × ${quick[0].text.replace(/ schnell/i,"")}`, `@ ${fastRange().replaceAll("/km", "")}`, "schnell"]);
   if (threshold.length) rows.push([`${threshold.length} Intervalle`, `@ ${thresholdRange().replaceAll("/km", "")}`, "Threshold"]);
@@ -366,13 +366,13 @@ function updateControlButtons(step) {
 
   nextBtn.textContent = "⏭ Nächster Schritt";
 
-  // ⏸ Pause und „⏭ Nächster Schritt“ gehören erst zum aktiven Training.
+  // Pause und „Nächster Schritt“ gehören erst zum aktiven Training.
   // Nach „Training beenden“ verschwinden beide wieder.
   pauseBtn.classList.toggle("is-hidden", !trainingActive);
   nextBtn.classList.toggle("is-hidden", !trainingActive);
 
   if (!step) {
-    startBtn.textContent = "Fertig";
+    startBtn.textContent = "✓ Fertig";
     startBtn.disabled = true;
     pauseBtn.disabled = true;
     nextBtn.disabled = true;
@@ -380,7 +380,7 @@ function updateControlButtons(step) {
   }
 
   if (step.type === "distance") {
-    startBtn.textContent = trainingActive ? "Training aktiv" : "Training starten";
+    startBtn.textContent = trainingActive ? "Training aktiv" : "▶ Training starten";
     startBtn.disabled = trainingActive;
     pauseBtn.disabled = true;
     nextBtn.disabled = false;
@@ -388,17 +388,17 @@ function updateControlButtons(step) {
   }
 
   if (running) {
-    startBtn.textContent = "Läuft";
+    startBtn.textContent = "▶ Läuft";
     startBtn.disabled = true;
     pauseBtn.textContent = "⏸ Pause";
     pauseBtn.disabled = false;
   } else if (remaining < total && total > 0) {
-    startBtn.textContent = "Pausiert";
+    startBtn.textContent = "⏸ Pausiert";
     startBtn.disabled = true;
-    pauseBtn.textContent = "Fortsetzen";
+    pauseBtn.textContent = "▶ Fortsetzen";
     pauseBtn.disabled = false;
   } else {
-    startBtn.textContent = "Start";
+    startBtn.textContent = "▶ Training starten";
     startBtn.disabled = false;
     pauseBtn.textContent = "⏸ Pause";
     pauseBtn.disabled = true;
@@ -423,7 +423,7 @@ function updateTimer() {
   if (step.label === "Threshold") info += ` · Ziel: ${thresholdRange()}`;
 
   if (step.type === "distance" && trainingActive) {
-    info += " · danach „⏭ Nächster Schritt“";
+    info += " · danach „Nächster Schritt“";
   }
 
   $("timerLabel").textContent = `${step.label} (${timerIndex + 1}/${timerSteps.length})`;
@@ -450,7 +450,7 @@ async function startTimer() {
 
   if (step.type === "distance") {
     vibrate(100);
-    speak(`Training gestartet. ${step.text}. Danach ⏭ Nächster Schritt drücken.`);
+    speak(`Training gestartet. ${step.text}. Danach Nächster Schritt drücken.`);
     updateTimer();
     return;
   }
