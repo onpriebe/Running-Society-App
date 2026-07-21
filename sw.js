@@ -1,4 +1,4 @@
-const CACHE_NAME = "running-society-github-v2-0-14";
+const CACHE_NAME = "running-society-github-v2-0-15";
 const CORE_ASSETS = [
   "./",
   "index.html",

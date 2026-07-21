@@ -618,7 +618,6 @@ function bindEvents() {
   });
 
   $("heroStartBtn").addEventListener("click", () => beginTraining(selected));
-  $("detailsStartBtn").addEventListener("click", () => beginTraining(selected));
   $("scrollDetailsBtn").addEventListener("click", () => $("appContent").scrollIntoView({ behavior:"smooth" }));
   $("scrollTopBtn").addEventListener("click", () => window.scrollTo({ top:0, behavior:"smooth" }));
   $("routePreviewBtn").addEventListener("click", () => $("routeDialog").showModal());

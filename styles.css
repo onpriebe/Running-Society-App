@@ -29,3 +29,12 @@
 .finish-box{margin-top:34px;padding-top:8px}
 .finish-box .secondary-action.solid{display:block;width:100%;background:var(--card);border-color:var(--line);color:var(--text);font-size:14px;min-height:48px}
 @media(max-height:720px){.start-content{justify-content:center}.start-date{margin-top:0}}
+
+
+/* UI refinements v2.0.15 */
+.info-icon{display:none}
+.sticky-start{display:none}
+.timer-controls #startBtn{background:var(--accent);border-color:var(--accent);color:var(--accent-text);font-weight:800}
+.timer-controls #finishBtn{background:#fff;border-color:#fff;color:#000;font-weight:800}
+.strava-heading{display:flex;align-items:center;gap:10px}
+.strava-heading-icon{width:26px;height:26px;flex:0 0 auto;fill:var(--orange)}
