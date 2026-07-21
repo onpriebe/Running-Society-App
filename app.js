@@ -372,7 +372,7 @@ function updateControlButtons(step) {
   nextBtn.classList.toggle("is-hidden", !trainingActive);
 
   if (!step) {
-    startBtn.textContent = "Fertig";
+    startBtn.textContent = "✓ Fertig";
     startBtn.disabled = true;
     pauseBtn.disabled = true;
     nextBtn.disabled = true;
@@ -380,7 +380,7 @@ function updateControlButtons(step) {
   }
 
   if (step.type === "distance") {
-    startBtn.textContent = trainingActive ? "Training aktiv" : "Training starten";
+    startBtn.textContent = trainingActive ? "Training aktiv" : "▶ Training starten";
     startBtn.disabled = trainingActive;
     pauseBtn.disabled = true;
     nextBtn.disabled = false;
@@ -388,17 +388,17 @@ function updateControlButtons(step) {
   }
 
   if (running) {
-    startBtn.textContent = "Läuft";
+    startBtn.textContent = "▶ Läuft";
     startBtn.disabled = true;
     pauseBtn.textContent = "Pause";
     pauseBtn.disabled = false;
   } else if (remaining < total && total > 0) {
-    startBtn.textContent = "Pausiert";
+    startBtn.textContent = "⏸ Pausiert";
     startBtn.disabled = true;
     pauseBtn.textContent = "Fortsetzen";
     pauseBtn.disabled = false;
   } else {
-    startBtn.textContent = "Start";
+    startBtn.textContent = "▶ Training starten";
     startBtn.disabled = false;
     pauseBtn.textContent = "Pause";
     pauseBtn.disabled = true;
