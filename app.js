@@ -364,7 +364,7 @@ function updateControlButtons(step) {
   const pauseBtn = $("pauseBtn");
   const nextBtn = $("nextBtn");
 
-  nextBtn.textContent = "⏭ Nächster Schritt";
+  nextBtn.textContent = "Nächster Schritt";
 
   // Pause und „Nächster Schritt“ gehören erst zum aktiven Training.
   // Nach „Training beenden“ verschwinden beide wieder.
@@ -380,7 +380,7 @@ function updateControlButtons(step) {
   }
 
   if (step.type === "distance") {
-    startBtn.textContent = trainingActive ? "Training aktiv" : "▶ Training starten";
+    startBtn.textContent = trainingActive ? "Training aktiv" : "Training starten";
     startBtn.disabled = trainingActive;
     pauseBtn.disabled = true;
     nextBtn.disabled = false;
@@ -390,17 +390,17 @@ function updateControlButtons(step) {
   if (running) {
     startBtn.textContent = "▶ Läuft";
     startBtn.disabled = true;
-    pauseBtn.textContent = "⏸ Pause";
+    pauseBtn.textContent = "Pause";
     pauseBtn.disabled = false;
   } else if (remaining < total && total > 0) {
     startBtn.textContent = "⏸ Pausiert";
     startBtn.disabled = true;
-    pauseBtn.textContent = "▶ Fortsetzen";
+    pauseBtn.textContent = "Fortsetzen";
     pauseBtn.disabled = false;
   } else {
-    startBtn.textContent = "▶ Training starten";
+    startBtn.textContent = "Training starten";
     startBtn.disabled = false;
-    pauseBtn.textContent = "⏸ Pause";
+    pauseBtn.textContent = "Pause";
     pauseBtn.disabled = true;
   }
   nextBtn.disabled = false;
