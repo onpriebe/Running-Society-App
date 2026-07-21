@@ -617,7 +617,9 @@ function bindEvents() {
     if (share) copyText(workoutText(workouts[Number(share.dataset.shareWeek)]));
   });
 
-  $("heroStartBtn").addEventListener("click", () => beginTraining(selected));
+  $("heroStartBtn").addEventListener("click", () => {
+    $("timerSection").scrollIntoView({ behavior:"smooth", block:"start" });
+  });
   $("scrollDetailsBtn").addEventListener("click", () => $("appContent").scrollIntoView({ behavior:"smooth" }));
   $("scrollTopBtn").addEventListener("click", () => window.scrollTo({ top:0, behavior:"smooth" }));
   $("routePreviewBtn").addEventListener("click", () => $("routeDialog").showModal());
@@ -631,7 +633,7 @@ function bindEvents() {
     setTimeout(() => $("paceProfile").scrollIntoView({ behavior:"smooth", block:"center" }), 350);
   });
   $("togglePaceForm").addEventListener("click", () => { $("paceForm").hidden = !$("paceForm").hidden; });
-  $("togglePlanBtn").addEventListener("click", () => {
+  const toggleTrainingPlan = () => {
     const isOpening = $("trainingPlan").hidden;
     $("trainingPlan").hidden = !isOpening;
     $("planToggleCard").classList.toggle("plan-open", isOpening);
@@ -639,6 +641,13 @@ function bindEvents() {
     $("togglePlanBtn").textContent = isOpening ? "⌃" : "›";
     if (isOpening) {
       $("planToggleCard").scrollIntoView({ behavior:"smooth", block:"start" });
+    }
+  };
+  $("planToggleCard").addEventListener("click", toggleTrainingPlan);
+  $("planToggleCard").addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleTrainingPlan();
     }
   });
   $("pace5k").addEventListener("input", calculatePaces);

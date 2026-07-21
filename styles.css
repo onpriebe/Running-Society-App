@@ -69,3 +69,10 @@
   color:var(--accent);
   font-size:22px;
 }
+
+
+/* UI refinement v2.0.19 */
+.plan-toggle-card{cursor:pointer;touch-action:manipulation}
+.plan-toggle-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.plan-chevron{color:#ddd;font-size:28px;line-height:1;text-align:center}
+.plan-toggle-card.plan-open .plan-chevron{color:var(--accent);font-size:22px}
