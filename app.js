@@ -632,8 +632,14 @@ function bindEvents() {
   });
   $("togglePaceForm").addEventListener("click", () => { $("paceForm").hidden = !$("paceForm").hidden; });
   $("togglePlanBtn").addEventListener("click", () => {
-    $("trainingPlan").hidden = !$("trainingPlan").hidden;
-    if (!$("trainingPlan").hidden) $("trainingPlan").scrollIntoView({ behavior:"smooth", block:"start" });
+    const isOpening = $("trainingPlan").hidden;
+    $("trainingPlan").hidden = !isOpening;
+    $("planToggleCard").classList.toggle("plan-open", isOpening);
+    $("togglePlanBtn").setAttribute("aria-expanded", String(isOpening));
+    $("togglePlanBtn").textContent = isOpening ? "⌃" : "›";
+    if (isOpening) {
+      $("planToggleCard").scrollIntoView({ behavior:"smooth", block:"start" });
+    }
   });
   $("pace5k").addEventListener("input", calculatePaces);
   $("paceThreshold").addEventListener("input", calculatePaces);

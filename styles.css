@@ -56,3 +56,16 @@
 .week-selector{margin:0 0 12px}
 .finish-box{margin-top:34px;padding-top:0}
 .finish-box .strava-heading{margin:0 0 12px}
+
+
+/* UI refinement v2.0.18: keep the training-plan control visible */
+.plan-toggle-card.plan-open{
+  position:sticky;
+  top:calc(env(safe-area-inset-top) + 6px);
+  z-index:20;
+  box-shadow:0 10px 18px rgba(0,0,0,.72);
+}
+.plan-toggle-card.plan-open #togglePlanBtn{
+  color:var(--accent);
+  font-size:22px;
+}
