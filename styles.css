@@ -76,3 +76,19 @@
 .plan-toggle-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .plan-chevron{color:#ddd;font-size:28px;line-height:1;text-align:center}
 .plan-toggle-card.plan-open .plan-chevron{color:var(--accent);font-size:22px}
+
+/* UI refinement v2.0.21: compact workout detail steps */
+.details ol{
+  margin:8px 0 0;
+  padding-left:24px;
+  font-size:14px;
+  line-height:1.4;
+}
+.details li{
+  margin:0 0 3px;
+  padding-left:1px;
+  font-weight:400;
+}
+.details li strong{
+  font-weight:700;
+}
